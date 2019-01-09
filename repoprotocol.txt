@@ -1,0 +1,14 @@
+Actions:
+
+Added | +
+Removed | --
+Organized | *
+Updated | ++
+
+Summary format:
+
+<NameOfAction> - <StructureActionIsBeingPerformedOn> - <NameOfStructure>
+
+Example:
+
+Added - SubRepo - circus_of_circles

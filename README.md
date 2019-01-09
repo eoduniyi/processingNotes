@@ -33,9 +33,9 @@ Repository description: Visualization made using Processing programming language
   * <b>Flying Lotus</b> -> {Zodiac Shit,...}
   * <b>GoldLink</b> -> {Pray Everday (@TinyDesk),...}
   * <b>H.E.R.</b> -> {Going (@TinyDesk), Still Down,...}
-* Clean up
+* Clean up:
   * Removing testing structures
   * Improve inline documentation
-* Clean up repository
+* Clean up repository:
   * Standardized the file names
   * Place all the loaded files in separate directories
