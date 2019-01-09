@@ -1,10 +1,11 @@
 # processingNotes
 Repository created: 12/29/28
+
 Repository description:
 
 
 ## Program(s):
-Contained within the <b>processingNotes</b> repository are the following directories and their associated program(s):
+Contained within the <b>processingNotes</b> repository are the following directories and their associated programs:
 
 ### SubRepo1. <i>Audio Visualizer - Circus of Circles</i>
 Date added: 1/9/19
