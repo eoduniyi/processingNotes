@@ -15,14 +15,13 @@ float[] x, y, angle;
 int interval = 15000; // 15s
 int time;
 PFont font;
-String oneName = "H.E.R. - Going (NPR Music Tiny Desk Concert)";
+String oneName = "Flying Lotus - Zodiac Shit";
 String otherName = "";
 String displayed = "";
 
 void setup(){
   // Set visualization to fullscreen, specifying the P3D renderer
   fullScreen(P3D);
-  pixelDensity(displayDensity());
   
   // Set the number of frames to be displayed per second
   // note, draw() has a default fps of 60
@@ -32,7 +31,7 @@ void setup(){
   minim = new Minim(this);
   
   // Load music to play and visualize:
-  player = minim.loadFile("H.E.R. - Going (ProcessingEdit).mp3"); 
+  player = minim.loadFile("Flying Lotus - Zodiac Shit.mp3"); 
   player.play();
 
   // Create an FFT object that has a time-domain bufferSize and sampleRate of player
@@ -46,7 +45,8 @@ void setup(){
   angle = new float[fft.specSize()]; 
   
   // Set font face and initial timing interval:
-  font = createFont("Courier New.ttf",25);
+  font = createFont("Courier New.ttf",20);
+  //font = createFont("Adam.otf",20);
   displayed = oneName;
   time = millis();
   
@@ -66,13 +66,13 @@ void draw(){
   fft.forward(player.mix);
 
   // Display the song name at intervals:
+  fill(255,255,255,255);
   textFont(font);
   textAlign(CENTER,CENTER);
   text(displayed,0,0);
   if(millis() - time > interval){
     displayed = displayed.equals(oneName) ? otherName:oneName;
-    time  = millis() + 25000;
-    oneName = "H.E.R. - Going (Interlude)";
+    time  = millis() + 11575; // For Zodiac shit
   }
   // Generate boxes
  circusOfCriclesHER1();
@@ -87,46 +87,67 @@ void draw(){
   * boxnAlgo - someFlippedVersion(box1Algo) using scale()
   */
 void circusOfCriclesHER1(){
-  // box0Algo
+ // box0Algo
   for(int i = 0; i < fft.specSize(); i++){
     pushMatrix();
     translate(0,-20);
-    noFill();
-    box(fft.getBand(i)/20+fft.getFreq(i)/15);
-    popMatrix();
-  }
-  // box1Algo:
-  for(int i = 0; i < fft.specSize(); i++){
-    scale(1,-1);
-    x[i] = x[i] + fft.getFreq(i)/1000;
-    y[i] = y[i] + fft.getBand(i);
-    angle[i] = angle[i] + fft.getFreq(i)/100000;
-    rotateX(sin(angle[i]/2));
-    rotateY(cos(angle[i]/2));
-    rotateZ(tan(angle[i]/2));
-    noFill();
-    stroke(255,255,255);
-    strokeWeight(1.5);
-    pushMatrix();
-    translate((x[i]+250) % width, (y[i]+250) % height);
+    fill(237,23,109,100);
+    stroke(237,23,109,100);
     box(fft.getBand(i)/20+fft.getFreq(i)/15);
     popMatrix();
   }
   
-  //box2Algo:
-  for(int i = 0; i < fft.specSize(); i++){
-    scale(-1,-1);
-    x[i] = x[i] + fft.getFreq(i)/1000;
+  //box1Algo:
+  for (int i = 0; i < fft.specSize(); i++) 
+  {
     y[i] = y[i] + fft.getBand(i)/1000;
+    x[i] = x[i] + fft.getFreq(i)/1000;
     angle[i] = angle[i] + fft.getFreq(i)/100000;
     rotateX(sin(angle[i]/2));
     rotateY(cos(angle[i]/2));
-    rotateZ(tan(angle[i]/2));
-    noFill();
-    stroke(255,255,255);
+    //noFill();
+    stroke(255,255,255,200);
+    stroke(fft.getFreq(i)*2, 0, fft.getBand(i)*2);
     strokeWeight(1.5);
     pushMatrix();
-    translate((x[i]+250) % width, (y[i]+250) % height);
+    translate((x[i]+250)%width, (y[i]+250)%height);
+    box(fft.getBand(i)/20+fft.getFreq(i)/15);
+    popMatrix();
+  } 
+  
+  //box2Algo:
+  for (int i = 0; i < fft.specSize(); i++) 
+  {
+    scale(-1, 1);
+    y[i] = y[i] + fft.getBand(i)/1000;
+    x[i] = x[i] + fft.getFreq(i)/1000;
+    angle[i] = angle[i] + fft.getFreq(i)/100000;
+    rotateX(sin(angle[i]/2));
+    rotateY(cos(angle[i]/2));
+    rotateZ(tan(angle[i]/2)); 
+    noFill();
+    stroke(129,288,255,200);
+    strokeWeight(1.5);
+    pushMatrix();
+    translate((x[i]+250)%width, (y[i]+250)%height);
+    box(fft.getBand(i)/20+fft.getFreq(i)/15);
+    popMatrix();
+  } 
+  
+  //box3Algo:
+  for (int i = 0; i < fft.specSize(); i++) 
+  {
+    scale(-1, 1);
+    y[i] = y[i] + fft.getBand(i)/1000;
+    x[i] = x[i] + fft.getFreq(i)/1000;
+    angle[i] = angle[i] + fft.getFreq(i)/100000;
+    rotateX(sin(angle[i]/2));
+    rotateY(cos(angle[i]/2));
+    fill(94,178,145,255);
+    stroke(94,178,145,255);
+    strokeWeight(1.5);
+    pushMatrix();
+    translate((x[i]+250)%width, (y[i]+250)%height);
     box(fft.getBand(i)/20+fft.getFreq(i)/15);
     popMatrix();
   }

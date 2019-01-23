@@ -50,6 +50,16 @@ void setup(){
   displayed = oneName;
   time = millis();
   
+    // Display the song name at intervals:
+  textFont(font);
+  textAlign(CENTER,CENTER);
+  text(displayed,0,0);
+  if(millis() - time > interval){
+    displayed = displayed.equals(oneName) ? otherName:oneName;
+    time  = millis() + 25000;
+    oneName = "H.E.R. - Going (Interlude)";
+  }
+  
   // Loop the process indefinitely...
   player.loop();
 }
@@ -65,15 +75,6 @@ void draw(){
   // which contains the mix of both the left and right channels of the audio file
   fft.forward(player.mix);
 
-  // Display the song name at intervals:
-  textFont(font);
-  textAlign(CENTER,CENTER);
-  text(displayed,0,0);
-  if(millis() - time > interval){
-    displayed = displayed.equals(oneName) ? otherName:oneName;
-    time  = millis() + 25000;
-    oneName = "H.E.R. - Going (Interlude)";
-  }
   // Generate boxes
  circusOfCriclesHER1();
 }

@@ -48,7 +48,7 @@ void setup(){
   angle = new float[fft.specSize()]; 
   
   // Set font face and initial timing interval:
-  font = createFont("Flama.ttf",25);
+  font = createFont("Adam.otf",25);
   displayed = oneName;
   time = millis();
   
@@ -79,7 +79,7 @@ void draw(){
   }
   diameter++;
   // Generate boxes
-   circusOfCriclesHER1();
+   circusOfCriclesTAL1();
 }
 /** Function description:
   * box0Algo - Generate a box (cube) which dimensions (size) is a function of the
@@ -90,7 +90,7 @@ void draw(){
   *   of the input signal
   * boxnAlgo - someFlippedVersion(box1Algo) using scale()
   */
-void circusOfCriclesHER1(){
+void circusOfCriclesTAL1(){
   // box0Algo
   for(int i = 0; i < fft.specSize(); i++){
     pushMatrix();
@@ -98,7 +98,7 @@ void circusOfCriclesHER1(){
     noFill();
     stroke(255);
     strokeWeight(3);
-    box(fft.getBand(i)/20+fft.getFreq(i)*10);
+    //box(fft.getBand(i)/20+fft.getFreq(i)*10);
     //translate((fft.getBand(i)*250) % width,(fft.getBand(i)*250) % height);
     //rotateX(sin((fft.getBand(i)/10000))/2);
     ellipse(0,0,fft.getBand(i)/20+fft.getFreq(i)*20,fft.getBand(i)/20+fft.getFreq(i)*20);

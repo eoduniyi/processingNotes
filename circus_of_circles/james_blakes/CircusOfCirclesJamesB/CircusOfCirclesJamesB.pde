@@ -15,13 +15,15 @@ float[] x, y, angle;
 int interval = 15000; // 15s
 int time;
 PFont font;
-String oneName = "H.E.R. - Going (NPR Music Tiny Desk Concert)";
+String oneName = "James Blake – Lullaby For My Insomniac";
 String otherName = "";
 String displayed = "";
+Boolean nameChange = true;
 
 void setup(){
   // Set visualization to fullscreen, specifying the P3D renderer
-  fullScreen(P3D);
+  //fullScreen(P3D);
+  size(displayWidth, displayHeight, P3D);
   pixelDensity(displayDensity());
   
   // Set the number of frames to be displayed per second
@@ -32,7 +34,7 @@ void setup(){
   minim = new Minim(this);
   
   // Load music to play and visualize:
-  player = minim.loadFile("Flying Lotus - Zodiac Shit.mp3");
+  player = minim.loadFile("james_blake_mix_3.mp3");
   player.play();
 
   // Create an FFT object that has a time-domain bufferSize and sampleRate of player
@@ -46,7 +48,7 @@ void setup(){
   angle = new float[fft.specSize()]; 
   
   // Set font face and initial timing interval:
-  font = createFont("Courier New.ttf",25);
+  font = createFont("Courier New.ttf",20);
   displayed = oneName;
   time = millis();
   
@@ -66,15 +68,16 @@ void draw(){
   fft.forward(player.mix);
 
   // Display the song name at intervals:
+  fill(255);
   textFont(font);
   textAlign(CENTER,CENTER);
   text(displayed,0,0);
   if(millis() - time > interval){
     displayed = displayed.equals(oneName) ? otherName:oneName;
-    time  = millis() + 25000;
-    oneName = "H.E.R. - Going (Interlude)";
+    time  = millis();
+    oneName = "James Blake - Mile High Ft. Travis Scott & Metro Boomin";
+    interval = 12000;
   }
-  // Generate boxes
  circusOfCriclesHER1();
 }
 /** Function description:
@@ -89,9 +92,28 @@ void draw(){
 void circusOfCriclesHER1(){
   // box0Algo
   for(int i = 0; i < fft.specSize(); i++){
+    //fill(228,104,54);
+    //stroke(228,104,54);
+    stroke(255);
     pushMatrix();
-    translate(0,-20);
-    noFill();
+    translate(0,-30);
+    box(fft.getBand(i)/10+fft.getFreq(i)/10);
+    popMatrix();
+  }
+  // box0Algo:
+  for(int i = 0; i < fft.specSize(); i++){
+    x[i] = x[i] + fft.getFreq(i)/1000;
+    y[i] = y[i] + fft.getBand(i)/1000;
+    angle[i] = angle[i] + fft.getFreq(i)/100000;
+    rotateX(sin(angle[i]/2));
+    rotateY(cos(angle[i]/2));
+    rotateZ(tan(angle[i]/2));
+    //noFill();
+    fill(255,255,255,70);
+    stroke(255,255,255,40);
+    //strokeWeight(1.5);
+    pushMatrix();
+    translate((x[i]+250) % width, (y[i]+250) % height);
     box(fft.getBand(i)/20+fft.getFreq(i)/15);
     popMatrix();
   }
@@ -99,20 +121,20 @@ void circusOfCriclesHER1(){
   for(int i = 0; i < fft.specSize(); i++){
     scale(1,-1);
     x[i] = x[i] + fft.getFreq(i)/1000;
-    y[i] = y[i] + fft.getBand(i);
+    y[i] = y[i] + fft.getBand(i)/1000;
     angle[i] = angle[i] + fft.getFreq(i)/100000;
     rotateX(sin(angle[i]/2));
     rotateY(cos(angle[i]/2));
     rotateZ(tan(angle[i]/2));
-    noFill();
-    stroke(255,255,255);
-    strokeWeight(1.5);
+    //noFill();
+    fill(228,104,54);
+    stroke(228,104,54);  
+    //strokeWeight(1.5);
     pushMatrix();
     translate((x[i]+250) % width, (y[i]+250) % height);
     box(fft.getBand(i)/20+fft.getFreq(i)/15);
     popMatrix();
-  }
-  
+  } 
   //box2Algo:
   for(int i = 0; i < fft.specSize(); i++){
     scale(-1,-1);
@@ -122,9 +144,10 @@ void circusOfCriclesHER1(){
     rotateX(sin(angle[i]/2));
     rotateY(cos(angle[i]/2));
     rotateZ(tan(angle[i]/2));
-    noFill();
-    stroke(255,255,255);
-    strokeWeight(1.5);
+    //noFill();
+    fill(255,255,255,10);
+    stroke(228,104,54);  
+    //strokeWeight(1.5);
     pushMatrix();
     translate((x[i]+250) % width, (y[i]+250) % height);
     box(fft.getBand(i)/20+fft.getFreq(i)/15);
