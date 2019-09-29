@@ -7,8 +7,8 @@ Updated | ++
 
 Summary format:
 
-<NameOfAction> - <StructureActionIsBeingPerformedOn> - <NameOfStructure>
+<nameOfAction> - <structureActionIsBeingPerformedOn> - <nameOfStructure>
 
 Example:
 
-Added - SubRepo - circus_of_circles
+Added - subRepo - circus_of_circles
